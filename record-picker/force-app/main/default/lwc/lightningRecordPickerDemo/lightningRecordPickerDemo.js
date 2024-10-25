@@ -15,7 +15,7 @@ export default class ContactPickerDemo extends LightningElement {
         criteria: [],
     };
 
-    @track contactList = []; // Список для збереження знайдених контактів
+    @track contactList = []; 
     selectedRecordId;
 
     handleRecordChange(event) {
@@ -26,7 +26,6 @@ export default class ContactPickerDemo extends LightningElement {
     getContactDetails() {
         getRecord({ recordId: this.selectedRecordId })
             .then(result => {
-                // Додаємо новий контакт у список, якщо його ще немає в масиві
                 if (!this.contactList.some(contact => contact.Id === result.Id)) {
                     this.contactList = [...this.contactList, result];
                 }
@@ -44,7 +43,6 @@ export default class ContactPickerDemo extends LightningElement {
 
     clearContact(event) {
         const contactId = event.target.dataset.contactId;
-        // Видаляємо контакт зі списку за його ID
         this.contactList = this.contactList.filter(contact => contact.Id !== contactId);
     }
 }
