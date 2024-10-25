@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Record Picker Demo" icon-name="custom:custom63">
+        <div class="picker-container"> 
+            <lightning-record-picker
+                label="Select a record"
+                placeholder="Search..."
+                object-api-name="Contact"
+                onchange={handleRecordChange}
+                matching-info={matchingInfo}
+                display-info={displayInfo}
+                filter={filter}>
+            </lightning-record-picker>
+        </div>
+
+        <template if:true={contactList}>
+            <div class="contact-list">
+                <template for:each={contactList} for:item="contact">
+                    <div key={contact.Id} class="contact-item">
+                        <p><strong>Ім'я:</strong> {contact.FirstName} {contact.LastName}</p>
+                        <p><strong>Телефон:</strong> {contact.Phone}</p>
+                        <p><strong>Email:</strong> {contact.Email}</p>
+                        
+                        <div class="button-container">
+                            <lightning-button 
+                                label="Open in New Tab" 
+                                data-contact-id={contact.Id} 
+                                onclick={openContactInNewTab}>
+                            </lightning-button>
+                            <lightning-button-icon 
+                                icon-name="utility:close" 
+                                alternative-text="Remove"
+                                data-contact-id={contact.Id} 
+                                onclick={clearContact}>
+                            </lightning-button-icon>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </lightning-card>
+</template>
